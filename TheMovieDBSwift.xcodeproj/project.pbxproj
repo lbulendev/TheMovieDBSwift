@@ -120,7 +120,6 @@
 				A4E666AE1E74B948002FA978 /* Assets.xcassets */,
 				A4E666B01E74B948002FA978 /* LaunchScreen.storyboard */,
 				A4E666B31E74B948002FA978 /* Info.plist */,
-				A4E666AB1E74B948002FA978 /* TheMovieDBSwift.xcdatamodeld */,
 			);
 			path = TheMovieDBSwift;
 			sourceTree = "<group>";
@@ -149,6 +148,7 @@
 				A4E666DC1E74D429002FA978 /* Movie.swift */,
 				A4E666DA1E74D0A4002FA978 /* MovieStore.swift */,
 				A4E666E01E74D977002FA978 /* MovieDBAPI.swift */,
+				A4E666AB1E74B948002FA978 /* TheMovieDBSwift.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
