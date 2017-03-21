@@ -27,8 +27,11 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // -20 to move the header back up 20
-        let insets = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+        // Get the height of the status bar
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navcontrollerHeight = self.navigationController?.navigationBar.frame.size.height
+        
+        let insets = UIEdgeInsets(top: -statusBarHeight-navcontrollerHeight!, left: 0, bottom: 0, right: 0)
         movieDetailTableView.contentInset = insets
         movieDetailTableView.scrollIndicatorInsets = insets
         
@@ -37,6 +40,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Create 1px high view; otherwise defaults to 30px or so]
         let emptyHeader = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 1.0))
+        emptyHeader.backgroundColor = UIColor.brown
         movieDetailTableView.tableHeaderView = emptyHeader
         
     }
@@ -92,6 +96,12 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             cell.videoLabel.text = "FALSE"
         }
         
+        switch movie.favorite {
+        case true:
+            cell.favoriteButton.setTitle("Remove from Favorites?", for: [])
+        case false:
+            cell.favoriteButton.setTitle("Add to Favorites?", for: [])
+        }
         cell.languageLabel.text = movie.originalLanguage
         return cell
     }

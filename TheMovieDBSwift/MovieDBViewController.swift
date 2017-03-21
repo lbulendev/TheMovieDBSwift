@@ -26,6 +26,26 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         super.init(nibName: nibNameOrNil, bundle: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "MovieDB")
+        
+        do {
+            movieDB = try managedContext.fetch(request) as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +73,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.saveMoviesToDB(movies: movies)
                 self.movieTableView.reloadData()
             case let .failure(error):
+                
                 print("Error fetching recent movies: \(error)")
             }
             
@@ -73,6 +94,10 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         return self.movieDB.count
     }
     
+    func fetchMovies() {
+        
+    }
+    
     func createMovieInstance (movie: NSManagedObject) -> Movie {
         let returnMovie = Movie(title: (movie.value(forKeyPath: "title") as? String)!,
                                 movieID: (movie.value(forKeyPath: "movieID") as? String)!,
@@ -86,7 +111,8 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                                 popularity: (movie.value(forKeyPath: "popularity") as? NSInteger)!,
                                 video: (movie.value(forKeyPath: "video") as? Bool)!,
                                 voteAverage : (movie.value(forKeyPath: "voteAverage") as? Double)!,
-                                voteCount : (movie.value(forKeyPath: "voteCount") as? Int)!)
+                                voteCount : (movie.value(forKeyPath: "voteCount") as? Int)!,
+                                favorite : (movie.value(forKeyPath: "favorite") as? Bool)!)
 
         return returnMovie
     }
@@ -123,34 +149,50 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
             appDelegate.persistentContainer.viewContext
         
         let entity =
-            NSEntityDescription.entity(forEntityName: "Movie",
+            NSEntityDescription.entity(forEntityName: "MovieDB",
                                        in: managedContext)!
 
         for movie in movies {
-            let eachMovie = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
-        
-            eachMovie.setValue(movie.title, forKeyPath: "title")
-            eachMovie.setValue(movie.movieID, forKeyPath: "movieID")
-            eachMovie.setValue(movie.releaseDate, forKeyPath: "releaseDate")
-            eachMovie.setValue(movie.posterURL.absoluteString, forKeyPath: "posterURLString")
-            eachMovie.setValue(movie.releaseDate, forKeyPath: "releaseDate")
-            eachMovie.setValue(movie.adult, forKeyPath: "adult")
-            eachMovie.setValue(movie.backdropURL.absoluteString, forKeyPath: "backdropURLString")
-            eachMovie.setValue(movie.originalLanguage, forKeyPath: "originalLanguage")
-            eachMovie.setValue(movie.originalTitle, forKeyPath: "originalTitle")
-            eachMovie.setValue(movie.overview, forKeyPath: "overview")
-            eachMovie.setValue(movie.popularity, forKeyPath: "popularity")
-            eachMovie.setValue(movie.video, forKeyPath: "video")
-            eachMovie.setValue(movie.voteAverage, forKeyPath: "voteAverage")
-            eachMovie.setValue(movie.voteCount, forKeyPath: "voteCount")
-
+            
+            let predicate = NSPredicate.init(format: "movieID = %@", movie.movieID)
+            let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "MovieDB")
+            request.predicate = predicate
             do {
-                try managedContext.save()
-                movieDB.append(eachMovie)
+                let results = try managedContext.fetch(request)
+                switch results.count {
+                case 0:
+                    do {
+                        let eachMovie = NSManagedObject(entity: entity,
+                                                        insertInto: managedContext)
+                        
+                        eachMovie.setValue(movie.title, forKeyPath: "title")
+                        eachMovie.setValue(movie.movieID, forKeyPath: "movieID")
+                        eachMovie.setValue(movie.releaseDate, forKeyPath: "releaseDate")
+                        eachMovie.setValue(movie.posterURL.absoluteString, forKeyPath: "posterURLString")
+                        eachMovie.setValue(movie.releaseDate, forKeyPath: "releaseDate")
+                        eachMovie.setValue(movie.adult, forKeyPath: "adult")
+                        eachMovie.setValue(movie.adult, forKeyPath: "favorite")
+                        eachMovie.setValue(movie.backdropURL.absoluteString, forKeyPath: "backdropURLString")
+                        eachMovie.setValue(movie.originalLanguage, forKeyPath: "originalLanguage")
+                        eachMovie.setValue(movie.originalTitle, forKeyPath: "originalTitle")
+                        eachMovie.setValue(movie.overview, forKeyPath: "overview")
+                        eachMovie.setValue(movie.popularity, forKeyPath: "popularity")
+                        eachMovie.setValue(movie.video, forKeyPath: "video")
+                        eachMovie.setValue(movie.voteAverage, forKeyPath: "voteAverage")
+                        eachMovie.setValue(movie.voteCount, forKeyPath: "voteCount")
+
+                        try managedContext.save()
+                        movieDB.append(eachMovie)
+                    } catch let error as NSError {
+                        print("Could not save. \(error), \(error.userInfo)")
+                    }
+                default:
+                    print("Found duplicate movie") // Do nothing for now.
+                }
             } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
+                print("Could not connect to sqlite db. Error: \(error.userInfo)")
             }
+
         }
     }
     

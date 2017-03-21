@@ -84,7 +84,6 @@ struct MovieDBAPI {
     }
 
     private static func movie(fromJSON json: [String : Any]) -> Movie? {
-//        let movieID = "123"
         guard
             let movieIdNum = json["id"] as? NSInteger,
             let title = json["title"] as? String,
@@ -111,6 +110,6 @@ struct MovieDBAPI {
             posterURL = URL(string: "https://image.tmdb.org/t/p/w1280" + posterURLString)!
         }
         let movieID = String(movieIdNum)
-        return Movie(title: title, movieID: movieID, posterURL: posterURL!, releaseDate: releaseDate, adult: adult, backdropURL: backdropURL, originalLanguage: originalLanguage, originalTitle: originalTitle, overview: overview, popularity: popularity, video: video, voteAverage: voteAverage, voteCount: voteCount)
+        return Movie(title: title, movieID: movieID, posterURL: posterURL!, releaseDate: releaseDate, adult: adult, backdropURL: backdropURL, originalLanguage: originalLanguage, originalTitle: originalTitle, overview: overview, popularity: popularity, video: video, voteAverage: voteAverage, voteCount: voteCount, favorite: false)
     }
 }

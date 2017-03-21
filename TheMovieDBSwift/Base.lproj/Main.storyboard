@@ -270,6 +270,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlE-dT-YRd">
+                                                    <rect key="frame" x="248" y="106" width="112" height="30"/>
+                                                    <state key="normal" title="Add to Favorites"/>
+                                                    <connections>
+                                                        <action selector="favoriteButtonclicked:" destination="fou-p4-jgG" eventType="touchUpInside" id="jvU-6b-GM4"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pBV-Ru-uP1" firstAttribute="width" secondItem="Lxu-ff-IxX" secondAttribute="width" id="15L-HX-8Y6"/>
@@ -280,6 +287,7 @@
                                                 <constraint firstItem="2ZL-Sp-pI2" firstAttribute="width" secondItem="Fm4-Ja-RV8" secondAttribute="width" id="9IW-la-D56"/>
                                                 <constraint firstItem="4qB-XY-tf2" firstAttribute="leading" secondItem="4v4-5B-mbe" secondAttribute="leading" id="AJW-nn-j1P"/>
                                                 <constraint firstItem="4qB-XY-tf2" firstAttribute="leading" secondItem="ggc-dt-7hK" secondAttribute="trailing" constant="8" id="AxM-ad-3Ht"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KlE-dT-YRd" secondAttribute="trailing" constant="7" id="Bf9-9j-KEb"/>
                                                 <constraint firstItem="6SO-6L-H54" firstAttribute="leading" secondItem="jHd-9g-8YY" secondAttribute="leadingMargin" constant="8" id="D5M-5v-imq"/>
                                                 <constraint firstItem="Lxu-ff-IxX" firstAttribute="leading" secondItem="URi-wd-bC6" secondAttribute="trailing" constant="8" id="DKS-90-Jaa"/>
                                                 <constraint firstItem="TOe-I1-0Jd" firstAttribute="top" secondItem="URi-wd-bC6" secondAttribute="bottom" constant="18" id="EC7-Yg-Yph"/>
@@ -302,6 +310,7 @@
                                                 <constraint firstItem="b6f-1a-afh" firstAttribute="leading" secondItem="GMT-Se-Q8x" secondAttribute="leading" id="XbD-6w-yte"/>
                                                 <constraint firstItem="4qB-XY-tf2" firstAttribute="top" secondItem="4v4-5B-mbe" secondAttribute="bottom" constant="8" id="YGS-dd-y1p"/>
                                                 <constraint firstItem="6SO-6L-H54" firstAttribute="leading" secondItem="GMT-Se-Q8x" secondAttribute="leading" id="Zax-oR-jAe"/>
+                                                <constraint firstItem="KlE-dT-YRd" firstAttribute="top" secondItem="MlA-KW-pen" secondAttribute="bottom" constant="4" id="afN-7T-cAf"/>
                                                 <constraint firstItem="Fm4-Ja-RV8" firstAttribute="top" secondItem="Dih-Sa-oGK" secondAttribute="bottom" constant="19.5" id="cIk-l8-ypv"/>
                                                 <constraint firstItem="Kad-Gt-nbE" firstAttribute="leading" secondItem="jHd-9g-8YY" secondAttribute="leadingMargin" constant="8" id="d91-di-cYq"/>
                                                 <constraint firstItem="yWI-TZ-Zs0" firstAttribute="top" secondItem="Dih-Sa-oGK" secondAttribute="bottom" constant="19.5" id="dHC-gI-3nD"/>
@@ -333,6 +342,7 @@
                                         <connections>
                                             <outlet property="adultLabel" destination="yWI-TZ-Zs0" id="pPa-Yp-fbv"/>
                                             <outlet property="averageVoteLabel" destination="pBV-Ru-uP1" id="aa5-0R-J7e"/>
+                                            <outlet property="favoriteButton" destination="KlE-dT-YRd" id="8qe-4H-Nd3"/>
                                             <outlet property="languageLabel" destination="xtv-JP-Lf8" id="aCM-qt-l8t"/>
                                             <outlet property="originalTitleLabel" destination="4qB-XY-tf2" id="i54-jp-WFQ"/>
                                             <outlet property="overviewLabel" destination="Kad-Gt-nbE" id="3tq-h3-Kc1"/>

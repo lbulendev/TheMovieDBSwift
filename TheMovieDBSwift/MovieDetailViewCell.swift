@@ -19,7 +19,16 @@ class MovieDetailViewCell : UITableViewCell {
     @IBOutlet var popularityLabel: UILabel!
     @IBOutlet var averageVoteLabel: UILabel!
     @IBOutlet var languageLabel: UILabel!
-    
+    @IBOutlet var favoriteButton: UIButton!
+
+    @IBAction func favoriteButtonclicked(_ sender: AnyObject) {
+        if (sender.title(for: []) != "Add to Favorites?") {
+            sender.setTitle("Add to Favorites?", for: [])
+        } else {
+            sender.setTitle("Remove from Favorites?", for: [])
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
