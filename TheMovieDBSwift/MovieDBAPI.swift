@@ -93,7 +93,6 @@ struct MovieDBAPI {
             let overview = json["overview"] as? String,
             let posterURLString = json["poster_path"] as? String,
             let backdropURLString = json["backdrop_path"] as? String,
-            let backdropURL = URL(string: backdropURLString),
             let popularity = json["popularity"] as? NSInteger,
             let voteCount = json["vote_count"] as? NSInteger,
             let voteAverage = json["vote_average"] as? Double,
@@ -109,7 +108,12 @@ struct MovieDBAPI {
         if (posterURLString.characters.count > 0) {
             posterURL = URL(string: "https://image.tmdb.org/t/p/w1280" + posterURLString)!
         }
+        
+        var backdropURL = URL.init(string:"")
+        if (backdropURLString.characters.count > 0) {
+            backdropURL = URL(string: "https://image.tmdb.org/t/p/w533_and_h300_bestv2" + backdropURLString)!
+        }
         let movieID = String(movieIdNum)
-        return Movie(title: title, movieID: movieID, posterURL: posterURL!, releaseDate: releaseDate, adult: adult, backdropURL: backdropURL, originalLanguage: originalLanguage, originalTitle: originalTitle, overview: overview, popularity: popularity, video: video, voteAverage: voteAverage, voteCount: voteCount, favorite: false)
+        return Movie(title: title, movieID: movieID, posterURL: posterURL!, releaseDate: releaseDate, adult: adult, backdropURL: backdropURL!, originalLanguage: originalLanguage, originalTitle: originalTitle, overview: overview, popularity: popularity, video: video, voteAverage: voteAverage, voteCount: voteCount, favorite: false)
     }
 }

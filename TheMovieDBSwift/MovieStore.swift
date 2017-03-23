@@ -71,10 +71,11 @@ class MovieStore {
         return .success(image)
     }
 
-    func fetchPosterImage(for movie: Movie, completion: @escaping (ImageResult) -> Void) {
+    func fetchPosterImage(for movie: Movie, isPoster: Bool, completion: @escaping (ImageResult) -> Void) {
         
-        let photoURL = movie.posterURL
-        let request = URLRequest(url: photoURL)
+        let imageURL = isPoster ? movie.posterURL: movie.backdropURL
+        var request = URLRequest(url: imageURL)
+        request.timeoutInterval = 600
         
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in

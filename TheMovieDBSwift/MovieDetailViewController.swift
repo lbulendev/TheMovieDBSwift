@@ -67,17 +67,28 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         let dateString : String = formatter.string(from: movie.releaseDate)
         cell.releaseDateLabel?.text = dateString
         cell.overviewLabel.text = movie.overview
-        store.fetchPosterImage(for: movie, completion: { (posterImageResult) -> Void in
+        store.fetchPosterImage(for: movie, isPoster: true, completion: { (posterImageResult) -> Void in
             
             switch posterImageResult {
             case let .success(image):
                 cell.posterImageView.image = image
             case let .failure(error):
-                print("Error fetching recent movies: \(error)")
+                print("Error fetching movie poster: \(error)")
+            }
+        })
+        
+        store.fetchPosterImage(for: movie, isPoster: false, completion: { (posterImageResult) -> Void in
+            
+            switch posterImageResult {
+            case let .success(image):
+                cell.backdropImageView.image = image
+            case let .failure(error):
+                print("Error fetching movie backdrop: \(error)")
             }
         })
 
         cell.posterImageView?.backgroundColor = UIColor.orange
+        cell.backdropImageView?.backgroundColor = UIColor.green
         
         cell.popularityLabel.text = String(format: "%d", movie.popularity)
         cell.averageVoteLabel.text = String(format: "%f", movie.voteAverage)

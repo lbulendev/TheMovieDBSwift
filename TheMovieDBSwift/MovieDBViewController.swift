@@ -126,7 +126,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString : String = formatter.string(from: movie.releaseDate)
         cell.releaseDateLabel?.text = dateString
-        store.fetchPosterImage(for: movie, completion: { (posterImageResult) -> Void in
+        store.fetchPosterImage(for: movie, isPoster: true, completion: { (posterImageResult) -> Void in
 
             switch posterImageResult {
             case let .success(image):

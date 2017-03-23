@@ -20,6 +20,7 @@ class MovieDetailViewCell : UITableViewCell {
     @IBOutlet var averageVoteLabel: UILabel!
     @IBOutlet var languageLabel: UILabel!
     @IBOutlet var favoriteButton: UIButton!
+    @IBOutlet var backdropImageView: UIImageView!
 
     @IBAction func favoriteButtonclicked(_ sender: AnyObject) {
         if (sender.title(for: []) != "Add to Favorites?") {
