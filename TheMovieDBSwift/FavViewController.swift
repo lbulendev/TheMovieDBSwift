@@ -7,16 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
 class FavViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var favTableView: UITableView!
-    var favMovieArray = [Movie]()
+    var favMovieArray = [NSManagedObject]()
+    let cellIdentifier: String = "UITableViewCell"
+
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let predicate = NSPredicate.init(format: "favorite = %@", "1")
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "MovieDB")
+        request.predicate = predicate
+        
+        do {
+            favMovieArray = try managedContext.fetch(request) as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favMovieArray.append(Movie())        
+        favTableView.delegate = self
+        favTableView.dataSource = self
     }
     
     // MARK: UITableViewDataSource methods
@@ -25,12 +50,10 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier: String = "UITableViewCell"
-        
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellIdentifier)
-        
-        cell.textLabel?.text = favMovieArray[indexPath.row].title
-        cell.detailTextLabel?.text = favMovieArray[indexPath.row].movieID
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UITableViewCell
+                
+        cell.textLabel?.text = favMovieArray[indexPath.row].value(forKey: "title") as? String
+        cell.detailTextLabel?.text = favMovieArray[indexPath.row].value(forKey: "originalTitle") as? String
         
         return cell
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class MovieDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var store: MovieStore!
     var movie = Movie()
@@ -67,6 +68,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         let dateString : String = formatter.string(from: movie.releaseDate)
         cell.releaseDateLabel?.text = dateString
         cell.overviewLabel.text = movie.overview
+        
         store.fetchPosterImage(for: movie, isPoster: true, completion: { (posterImageResult) -> Void in
             
             switch posterImageResult {
@@ -116,4 +118,5 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         cell.languageLabel.text = movie.originalLanguage
         return cell
     }
+    
 }

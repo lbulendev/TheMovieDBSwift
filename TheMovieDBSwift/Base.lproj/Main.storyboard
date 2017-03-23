@@ -389,7 +389,7 @@
         <!--Favs-->
         <scene sceneID="Iv2-MQ-2fF">
             <objects>
-                <viewController storyboardIdentifier="favVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BzE-Rv-V0C" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="favVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BzE-Rv-V0C" customClass="FavViewController" customModule="TheMovieDBSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gtL-ty-WbD"/>
                         <viewControllerLayoutGuide type="bottom" id="VgZ-mq-Wab"/>
@@ -438,6 +438,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favs" id="mvf-iy-Shd"/>
+                    <connections>
+                        <outlet property="favTableView" destination="Tbs-4G-T8L" id="6eP-Oh-INE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etu-XJ-61E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

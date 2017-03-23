@@ -22,11 +22,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieDBSwift/MovieDetailViewController.swift"
-            timestampString = "511932165.289281"
+            timestampString = "511943978.916677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -37,13 +37,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TheMovieDBSwift/MovieDetailViewController.swift"
-            timestampString = "511932167.60952"
+            filePath = "TheMovieDBSwift/MovieDetailViewCell.swift"
+            timestampString = "511943970.880884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "updateRecordInDB(isFavorite:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

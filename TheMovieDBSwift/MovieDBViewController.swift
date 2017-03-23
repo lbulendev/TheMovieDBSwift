@@ -5,7 +5,6 @@
 //  Created by Larry Bulen on 3/11/17.
 //  Copyright © 2017 Larry Bulen. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
@@ -15,7 +14,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
     var store: MovieStore!
     var movieDB = [NSManagedObject]()
     let cellIdentifier: String = "MovieTableViewCell"
-
+    
     required init?(coder aDecoder: NSCoder) {
         store = MovieStore()
         super.init(coder: aDecoder)
@@ -89,7 +88,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.pushViewController(detailVC, animated: false)
     }
     
-// MARK: UITableViewDataSource methods
+    // MARK: UITableViewDataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.movieDB.count
     }
@@ -113,7 +112,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                                 voteAverage : (movie.value(forKeyPath: "voteAverage") as? Double)!,
                                 voteCount : (movie.value(forKeyPath: "voteCount") as? Int)!,
                                 favorite : (movie.value(forKeyPath: "favorite") as? Bool)!)
-
+        
         return returnMovie
     }
     
@@ -127,7 +126,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         let dateString : String = formatter.string(from: movie.releaseDate)
         cell.releaseDateLabel?.text = dateString
         store.fetchPosterImage(for: movie, isPoster: true, completion: { (posterImageResult) -> Void in
-
+            
             switch posterImageResult {
             case let .success(image):
                 cell.moviePosterImageView.image = image
@@ -151,7 +150,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         let entity =
             NSEntityDescription.entity(forEntityName: "MovieDB",
                                        in: managedContext)!
-
+        
         for movie in movies {
             
             let predicate = NSPredicate.init(format: "movieID = %@", movie.movieID)
@@ -180,7 +179,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                         eachMovie.setValue(movie.video, forKeyPath: "video")
                         eachMovie.setValue(movie.voteAverage, forKeyPath: "voteAverage")
                         eachMovie.setValue(movie.voteCount, forKeyPath: "voteCount")
-
+                        
                         try managedContext.save()
                         movieDB.append(eachMovie)
                     } catch let error as NSError {
@@ -192,7 +191,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
             } catch let error as NSError {
                 print("Could not connect to sqlite db. Error: \(error.userInfo)")
             }
-
+            
         }
     }
     

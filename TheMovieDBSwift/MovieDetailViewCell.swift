@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailViewCell : UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
@@ -25,9 +26,12 @@ class MovieDetailViewCell : UITableViewCell {
     @IBAction func favoriteButtonclicked(_ sender: AnyObject) {
         if (sender.title(for: []) != "Add to Favorites?") {
             sender.setTitle("Add to Favorites?", for: [])
+            updateRecordInDB(isFavorite: false)
         } else {
             sender.setTitle("Remove from Favorites?", for: [])
+            updateRecordInDB(isFavorite: true)
         }
+
     }
 
     override func awakeFromNib() {
@@ -35,5 +39,32 @@ class MovieDetailViewCell : UITableViewCell {
         // Initialization code
         titleLabel.adjustsFontForContentSizeCategory = true
         releaseDateLabel.adjustsFontForContentSizeCategory = true
+    }
+    
+    func updateRecordInDB(isFavorite: Bool) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        let predicate = NSPredicate.init(format: "title = %@", self.titleLabel.text!)
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "MovieDB")
+        request.predicate = predicate
+        do {
+            if let results = try managedContext.fetch(request) as? [NSManagedObject] {
+                if results.count != 0 {
+                    
+                    let updatedMovie = results[0]
+                    updatedMovie.setValue(isFavorite, forKeyPath: "favorite")
+                    
+                    try managedContext.save()
+                }
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
     }
 }
