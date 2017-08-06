@@ -13,7 +13,6 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet var favTableView: UITableView!
     var favMovieArray = [NSManagedObject]()
-    let cellIdentifier: String = "UITableViewCell"
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +49,7 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.FavCell, for: indexPath) as! UITableViewCell
                 
         cell.textLabel?.text = favMovieArray[indexPath.row].value(forKey: "title") as? String
         cell.detailTextLabel?.text = favMovieArray[indexPath.row].value(forKey: "originalTitle") as? String

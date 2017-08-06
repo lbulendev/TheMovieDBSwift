@@ -11,7 +11,6 @@ import UIKit
 class MovieDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var store: MovieStore!
     var movie = Movie()
-    let cellIdentifier: String = "MovieDetailViewCell"
     @IBOutlet var movieDetailTableView: UITableView!
 
     
@@ -41,7 +40,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Create 1px high view; otherwise defaults to 30px or so]
         let emptyHeader = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 1.0))
-        emptyHeader.backgroundColor = UIColor.brown
+        emptyHeader.backgroundColor = Constants.Colors.brownColor
         movieDetailTableView.tableHeaderView = emptyHeader
         
     }
@@ -60,7 +59,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieDetailViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.DetailCell, for: indexPath) as! MovieDetailViewCell
         
         cell.titleLabel.text = movie.title
         let formatter = DateFormatter()
@@ -89,8 +88,8 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             }
         })
 
-        cell.posterImageView?.backgroundColor = UIColor.orange
-        cell.backdropImageView?.backgroundColor = UIColor.green
+        cell.posterImageView?.backgroundColor = Constants.Colors.orangeColor
+        cell.backdropImageView?.backgroundColor = Constants.Colors.greenColor
         
         cell.popularityLabel.text = String(format: "%d", movie.popularity)
         cell.averageVoteLabel.text = String(format: "%f", movie.voteAverage)

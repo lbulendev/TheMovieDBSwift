@@ -13,7 +13,6 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var movieTableView: UITableView!
     var store: MovieStore!
     var movieDB = [NSManagedObject]()
-    let cellIdentifier: String = "MovieTableViewCell"
     
     required init?(coder aDecoder: NSCoder) {
         store = MovieStore()
@@ -117,7 +116,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.MovieCell, for: indexPath) as! MovieTableViewCell
         
         let movie = createMovieInstance(movie: movieDB[indexPath.row])
         cell.titleLabel.text = movie.title
@@ -134,7 +133,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                 print("Error fetching recent movies: \(error)")
             }
         })
-        cell.moviePosterImageView?.backgroundColor = UIColor.orange
+        cell.moviePosterImageView?.backgroundColor = Constants.Colors.orangeColor
         return cell
     }
     
