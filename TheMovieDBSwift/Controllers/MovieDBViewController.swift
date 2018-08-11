@@ -48,10 +48,8 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         // Get the height of the status bar
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let navcontrollerHeight = self.navigationController?.navigationBar.frame.size.height
         
-        let insets = UIEdgeInsets(top: -statusBarHeight-navcontrollerHeight!, left: 0, bottom: 0, right: 0)
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         movieTableView.contentInset = insets
         movieTableView.scrollIndicatorInsets = insets
         
@@ -106,7 +104,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
                                 originalLanguage: (movie.value(forKeyPath: "originalLanguage") as? String)!,
                                 originalTitle: (movie.value(forKeyPath: "originalTitle") as? String)!,
                                 overview: (movie.value(forKeyPath: "overview") as? String)!,
-                                popularity: (movie.value(forKeyPath: "popularity") as? NSInteger)!,
+                                popularity: (movie.value(forKeyPath: "popularity") as? Double)!,
                                 video: (movie.value(forKeyPath: "video") as? Bool)!,
                                 voteAverage : (movie.value(forKeyPath: "voteAverage") as? Double)!,
                                 voteCount : (movie.value(forKeyPath: "voteCount") as? Int)!,

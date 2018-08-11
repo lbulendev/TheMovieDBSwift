@@ -19,13 +19,13 @@ class Movie {
     let originalLanguage: String
     let originalTitle: String
     let overview: String
-    let popularity: NSInteger
+    let popularity: Double
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
     let favorite: Bool
-    
-    init(title: String, movieID: String, posterURL: URL, releaseDate: Date, adult: Bool, backdropURL: URL, originalLanguage: String, originalTitle: String, overview: String, popularity: NSInteger, video: Bool, voteAverage : Double, voteCount : Int, favorite: Bool) {
+
+    init(title: String, movieID: String, posterURL: URL, releaseDate: Date, adult: Bool, backdropURL: URL, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, video: Bool, voteAverage : Double, voteCount : Int, favorite: Bool) {
         self.title = title
         self.movieID = movieID
         self.posterURL = posterURL
@@ -41,7 +41,7 @@ class Movie {
         self.voteCount = voteCount
         self.favorite = favorite
     }
-    
+
     init() {
         self.title = "Everest"
         self.movieID = "9999"
@@ -52,7 +52,7 @@ class Movie {
         self.originalLanguage = "English"
         self.originalTitle = self.title
         self.overview = "No overview"
-        self.popularity = 0
+        self.popularity = 0.0
         self.video = false
         self.voteAverage = 0
         self.voteCount = 0

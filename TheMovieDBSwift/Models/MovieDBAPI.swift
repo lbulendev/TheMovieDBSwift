@@ -93,7 +93,7 @@ struct MovieDBAPI {
             let overview = json["overview"] as? String,
             let posterURLString = json["poster_path"] as? String,
             let backdropURLString = json["backdrop_path"] as? String,
-            let popularity = json["popularity"] as? NSInteger,
+            let popularity = json["popularity"] as? Double,
             let voteCount = json["vote_count"] as? NSInteger,
             let voteAverage = json["vote_average"] as? Double,
             let video = json["video"] as? Bool,
@@ -105,12 +105,12 @@ struct MovieDBAPI {
         }
         
         var posterURL = URL.init(string: "")
-        if (posterURLString.characters.count > 0) {
+        if (posterURLString.count > 0) {
             posterURL = URL(string: "https://image.tmdb.org/t/p/w1280" + posterURLString)!
         }
         
         var backdropURL = URL.init(string:"")
-        if (backdropURLString.characters.count > 0) {
+        if (backdropURLString.count > 0) {
             backdropURL = URL(string: "https://image.tmdb.org/t/p/w533_and_h300_bestv2" + backdropURLString)!
         }
         let movieID = String(movieIdNum)

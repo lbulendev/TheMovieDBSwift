@@ -49,12 +49,19 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.FavCell, for: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.FavCell, for: indexPath) 
                 
         cell.textLabel?.text = favMovieArray[indexPath.row].value(forKey: "title") as? String
         cell.detailTextLabel?.text = favMovieArray[indexPath.row].value(forKey: "originalTitle") as? String
         
         return cell
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
+//        detailVC.movie = createMovieInstance (movie: favMovieArray[indexPath.row])
+//        detailVC.store = store
+        navigationController?.pushViewController(detailVC, animated: false)
+    }
 }
