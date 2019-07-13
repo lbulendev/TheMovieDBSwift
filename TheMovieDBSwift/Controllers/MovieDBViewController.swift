@@ -53,7 +53,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         movieTableView.contentInset = insets
         movieTableView.scrollIndicatorInsets = insets
         
-        movieTableView.rowHeight = UITableViewAutomaticDimension
+        movieTableView.rowHeight = UITableView.automaticDimension
         movieTableView.estimatedRowHeight = 75
         
         // Create 1px high view; otherwise defaults to 30px or so]
@@ -126,7 +126,9 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
             
             switch posterImageResult {
             case let .success(image):
-                cell.moviePosterImageView.image = image
+                DispatchQueue.main.async {
+                    cell.moviePosterImageView.image = image
+                }
             case let .failure(error):
                 print("Error fetching recent movies: \(error)")
             }
