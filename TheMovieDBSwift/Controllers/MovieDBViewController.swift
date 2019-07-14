@@ -90,10 +90,6 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         return self.movieDB.count
     }
     
-    func fetchMovies() {
-        
-    }
-    
     func createMovieInstance (movie: NSManagedObject) -> Movie {
         let returnMovie = Movie(title: (movie.value(forKeyPath: "title") as? String)!,
                                 movieID: (movie.value(forKeyPath: "movieID") as? String)!,
