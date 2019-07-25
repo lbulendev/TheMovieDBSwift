@@ -61,11 +61,12 @@ class MovieStore {
             let image = UIImage(data: imageData) else {
                 
                 // Couldn't create an image
-                if data == nil {
-                    return .failure(error!)
-                } else {
+//                if data == nil {
+//                    return .failure(error!)
+//                } else {
                     return .failure(ImageError.imageCreationError)
-                }
+//                }
+                
         }
         
         return .success(image)

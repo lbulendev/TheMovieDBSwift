@@ -49,7 +49,7 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Get the height of the status bar
         
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let insets = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         movieTableView.contentInset = insets
         movieTableView.scrollIndicatorInsets = insets
         
@@ -190,4 +190,36 @@ class MovieDBViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+}
+
+
+extension UIView {
+    
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.topAnchor
+        }
+        return self.topAnchor
+    }
+    
+    var safeLeftAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *){
+            return self.safeAreaLayoutGuide.leftAnchor
+        }
+        return self.leftAnchor
+    }
+    
+    var safeRightAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *){
+            return self.safeAreaLayoutGuide.rightAnchor
+        }
+        return self.rightAnchor
+    }
+    
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.bottomAnchor
+        }
+        return self.bottomAnchor
+    }
 }

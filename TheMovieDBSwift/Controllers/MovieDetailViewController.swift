@@ -27,7 +27,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         movieDetailTableView.contentInset = insets
         movieDetailTableView.scrollIndicatorInsets = insets
         
