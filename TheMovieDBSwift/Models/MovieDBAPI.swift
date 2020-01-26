@@ -14,9 +14,7 @@ enum MovieDBError: Error {
 
 struct MovieDBAPI {
     private static let baseURLString = "http://api.themoviedb.org/3/discover/movie"
-    private static let apiKey = "ab41356b33d100ec61e6c098ecc92140"
-    
-//    http://api.themoviedb.org/3/discover/movie?api_key=ab41356b33d100ec61e6c098ecc92140&sort_by=popularity.desc
+    private static let apiKey = "put key in here" // Need to get API key from API site
 
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
